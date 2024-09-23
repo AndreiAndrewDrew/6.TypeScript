@@ -1,7 +1,9 @@
 "use strict";
-let sum = 1000;
-let dobinda = 500;
-let s = "Andrew";
-let b = true;
-let res = sum + dobinda;
-console.log(res);
+function getFullName(firstName, lastName) {
+    return `${firstName} ${lastName}`;
+}
+//Analog cu functie sageata
+const getFullNameArrow = (firstName, lastName) => {
+    return `${firstName} ${lastName}`;
+};
+console.log(getFullName('Andrew', 'Boll'));

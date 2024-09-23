@@ -1,7 +1,10 @@
-let sum: number = 1000;
-let dobinda: number = 500;
-let s: string = "Andrew";
-let b: boolean = true;
+function getFullName(firstName: string, lastName: string): string {
+  return `${firstName} ${lastName}`;
+}
 
-let res: number = sum + dobinda;
-console.log(res);
+//Analog cu functie sageata
+const getFullNameArrow = (firstName: string, lastName: string): string => {
+  return `${firstName} ${lastName}`;
+};
+
+console.log(getFullName('Andrew', 'Boll'));
