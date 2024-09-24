@@ -1,24 +1,10 @@
 "use strict";
-function getFullName(firstName, lastName) {
-    return `${firstName} ${lastName}`;
+const skills = ['Dev', 'DevOps', 'Testing'];
+for (const skill of skills) {
+    console.log(skill.toUpperCase());
 }
-//Analog cu functie sageata
-const getFullNameArrow = (firstName, lastName) => {
-    return `${firstName} ${lastName}`;
-};
-console.log(getFullName('Andrew', 'Boll'));
-const user = {
-    firstname: 'Timo',
-    surname: 'Boll',
-    city: 'Berlin',
-    age: 41,
-    skills: {
-        dev: true,
-        devops: true
-    }
-};
-function getNameUser(userEntity) {
-    userEntity.age = 45;
-    return `${userEntity.firstname} ${userEntity.surname} traieste in ${userEntity.city}, are ${userEntity.age} de ani.`;
-}
-console.log(getNameUser(user));
+const res = skills
+    .filter((s) => s !== "DevOps")
+    .map((s) => s + "!")
+    .reduce((a, b) => a + b);
+console.log(res);
