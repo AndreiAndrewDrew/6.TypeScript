@@ -18,11 +18,11 @@ function logError(err: string | string[]) {
 
 function logObject(obj: { a: number } | { b: number }) {
   if ("a" in obj) {
-    console.log('Valoare keiei "a" =',obj.a);
-    console.log('Obiectul a =',obj);
+    console.log('Valoare key "a" =',obj.a);
+    console.log('Primul obiect =',obj);
   } else {
-    console.log('Valoare keiei "b" =',obj.b);
-    console.log('Obiectul b =',obj);
+    console.log('Valoare key "b" =',obj.b);
+    console.log('Al doilea obiect =',obj);
   }
 }
 
@@ -36,16 +36,16 @@ function logMultipleIds(a: string | number, b: string | boolean){
     console.log('b=',b)
   }
 }
-
+console.log('Exemplu 1 de Union(string | number | boolean):')
 logId(1);
 logId("Primul Id");
 logId(true);
-
+console.log('Exemplu 2 de Union(string | string[]):')
 logError('eroare 1')
 logError(['Erore 1','Eroare 2'])
-
+console.log('Exemplu 3 de Union({ a: number } | { b: number }):')
 logObject({a:4})
 logObject({b:7})
-
+console.log('Exemplu 4 de Union(a: string | number, b: string | boolean):')
 logMultipleIds('AndreW','AndreW')
 logMultipleIds(1,true)
