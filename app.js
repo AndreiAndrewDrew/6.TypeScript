@@ -1,43 +1,50 @@
 "use strict";
-var StatusCode;
-(function (StatusCode) {
-    StatusCode[StatusCode["SUCCESS"] = 1] = "SUCCESS";
-    StatusCode[StatusCode["IN_PROCESS"] = 2] = "IN_PROCESS";
-    StatusCode[StatusCode["FAILED"] = 3] = "FAILED";
-})(StatusCode || (StatusCode = {}));
-const res = {
-    message: "Tranzactie reusita",
-    statusCode: StatusCode.SUCCESS,
-};
-// 1 - tranzactie reusita
-// 2 - tranzactie in process
-// 3 - tranzactie respinsa
-if (res.statusCode === StatusCode.SUCCESS) {
+function logId(id) {
+    if (typeof id === "string") {
+        console.log('id=', id.toUpperCase());
+    }
+    else if (typeof id === "number") {
+        console.log('id=', id + 4);
+    }
+    else {
+        console.log('id=', id);
+    }
 }
-//exemplu 2
-var StatusCode2;
-(function (StatusCode2) {
-    StatusCode2[StatusCode2["SUCCESS"] = 1] = "SUCCESS";
-    StatusCode2["IN_PROCESS"] = "p";
-    StatusCode2["FAILED"] = "f";
-})(StatusCode2 || (StatusCode2 = {}));
-const res2 = {
-    message: "Tranzactie reusita",
-    statusCode: StatusCode2.SUCCESS,
-};
-// s - tranzactie reusita
-// p - tranzactie in process
-// f - tranzactie respinsa
-function action(status) { }
-action(StatusCode2.SUCCESS);
-action(1);
-// action('p') //ne da euroare
-function compute() {
-    return 3;
+function logError(err) {
+    if (Array.isArray(err)) {
+        console.log('Eroare=', err);
+    }
+    else {
+        console.log('Eroare=', err);
+    }
 }
-var Roles;
-(function (Roles) {
-    Roles[Roles["ADMIN"] = 1] = "ADMIN";
-    Roles[Roles["USER"] = compute()] = "USER";
-})(Roles || (Roles = {}));
-const res3 = 1 /* Roles3.ADMIN */;
+function logObject(obj) {
+    if ("a" in obj) {
+        console.log('Valoare keiei "a" =', obj.a);
+        console.log('Obiectul a =', obj);
+    }
+    else {
+        console.log('Valoare keiei "b" =', obj.b);
+        console.log('Obiectul b =', obj);
+    }
+}
+function logMultipleIds(a, b) {
+    if (a === b) {
+        //daca sunt echivalente lucram cu ele ca cu string
+        console.log('a=', a.toLowerCase());
+        console.log('b=', b.toUpperCase());
+    }
+    else {
+        console.log('a=', a);
+        console.log('b=', b);
+    }
+}
+logId(1);
+logId("Primul Id");
+logId(true);
+logError('eroare 1');
+logError(['Erore 1', 'Eroare 2']);
+logObject({ a: 4 });
+logObject({ b: 7 });
+logMultipleIds('AndreW', 'AndreW');
+logMultipleIds(1, true);

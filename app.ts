@@ -1,57 +1,51 @@
-enum StatusCode {
-  SUCCESS = 1,
-  IN_PROCESS,
-  FAILED,
+function logId(id: string | number | boolean) {
+  if (typeof id === "string") {
+    console.log('id=',id.toUpperCase());
+  } else if (typeof id === "number") {
+    console.log('id=',id + 4);
+  } else {
+    console.log('id=',id);
+  }
 }
 
-const res = {
-  message: "Tranzactie reusita",
-  statusCode: StatusCode.SUCCESS,
-};
-
-// 1 - tranzactie reusita
-// 2 - tranzactie in process
-// 3 - tranzactie respinsa
-
-if (res.statusCode === StatusCode.SUCCESS) {
+function logError(err: string | string[]) {
+  if (Array.isArray(err)) {
+    console.log('Eroare=',err);
+  } else {
+    console.log('Eroare=',err);
+  }
 }
 
-//exemplu 2
-
-enum StatusCode2 {
-  SUCCESS = 1,
-  IN_PROCESS = "p",
-  FAILED = "f",
+function logObject(obj: { a: number } | { b: number }) {
+  if ("a" in obj) {
+    console.log('Valoare keiei "a" =',obj.a);
+    console.log('Obiectul a =',obj);
+  } else {
+    console.log('Valoare keiei "b" =',obj.b);
+    console.log('Obiectul b =',obj);
+  }
 }
 
-const res2 = {
-  message: "Tranzactie reusita",
-  statusCode: StatusCode2.SUCCESS,
-};
-
-// s - tranzactie reusita
-// p - tranzactie in process
-// f - tranzactie respinsa
-
-function action(status: StatusCode2) {}
-
-action(StatusCode2.SUCCESS);
-action(1);
-// action('p') //ne da euroare
-
-function compute() {
-  return 3;
+function logMultipleIds(a: string | number, b: string | boolean){
+  if(a === b){
+    //daca sunt echivalente lucram cu ele ca cu string
+    console.log('a=',a.toLowerCase())
+    console.log('b=',b.toUpperCase())
+  }else{
+    console.log('a=',a)
+    console.log('b=',b)
+  }
 }
 
-enum Roles {
-  ADMIN = 1,
-  USER = compute(),
-}
+logId(1);
+logId("Primul Id");
+logId(true);
 
-//Exemplu 3
-const enum Roles3{
-  ADMIN = 1,
-  USER = 2
-}
+logError('eroare 1')
+logError(['Erore 1','Eroare 2'])
 
-const res3 = Roles3.ADMIN
+logObject({a:4})
+logObject({b:7})
+
+logMultipleIds('AndreW','AndreW')
+logMultipleIds(1,true)
