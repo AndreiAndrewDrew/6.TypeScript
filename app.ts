@@ -1,51 +1,16 @@
-function logId(id: string | number | boolean) {
-  if (typeof id === "string") {
-    console.log('id=',id.toUpperCase());
-  } else if (typeof id === "number") {
-    console.log('id=',id + 4);
-  } else {
-    console.log('id=',id);
-  }
+enum RequestType{
+  GET = 'get',
+  POST = 'post'
+}
+//de fieacre data de facut enum..nu este optimal
+
+
+function fetchWithAuth(url: string, method: RequestType){
 }
 
-function logError(err: string | string[]) {
-  if (Array.isArray(err)) {
-    console.log('Eroare=',err);
-  } else {
-    console.log('Eroare=',err);
-  }
+//exemplu 2 analog
+function fetchWithAuth2(url: string, method: 'post' | 'get'){
 }
 
-function logObject(obj: { a: number } | { b: number }) {
-  if ("a" in obj) {
-    console.log('Valoare key "a" =',obj.a);
-    console.log('Primul obiect =',obj);
-  } else {
-    console.log('Valoare key "b" =',obj.b);
-    console.log('Al doilea obiect =',obj);
-  }
-}
-
-function logMultipleIds(a: string | number, b: string | boolean){
-  if(a === b){
-    //daca sunt echivalente lucram cu ele ca cu string
-    console.log('a=',a.toLowerCase())
-    console.log('b=',b.toUpperCase())
-  }else{
-    console.log('a=',a)
-    console.log('b=',b)
-  }
-}
-console.log('Exemplu 1 de Union(string | number | boolean):')
-logId(1);
-logId("Primul Id");
-logId(true);
-console.log('Exemplu 2 de Union(string | string[]):')
-logError('eroare 1')
-logError(['Erore 1','Eroare 2'])
-console.log('Exemplu 3 de Union({ a: number } | { b: number }):')
-logObject({a:4})
-logObject({b:7})
-console.log('Exemplu 4 de Union(a: string | number, b: string | boolean):')
-logMultipleIds('AndreW','AndreW')
-logMultipleIds(1,true)
+fetchWithAuth2('s','get')//get sau post..altceva da eroare
+// fetchWithAuth2('s','af')//eroare
