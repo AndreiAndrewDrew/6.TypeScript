@@ -1,41 +1,45 @@
 interface User {
-  //inetrfatsa User
   name: string;
-  age: number;
-  skills: string[];
-
-  log: (id: number) => string;
 }
 
-interface Role {
-  roleId: number;
+interface User {
+  age: number,
+
 }
 
-interface UserWithRole extends User, Role {
-  createdAt: Date;
+const user :User ={
+  name:'andrew',
+  age: 35
 }
 
-let user: UserWithRole = {
-  name: "Andrew",
-  age: 34,
-  skills: ["1", "2"],
-  roleId: 1,
-  createdAt: new Date(),
-  log(id) {
-    return `Functia 'log' cu id=${id}`;
-  },
-};
+console.log(user)
 
-console.log(user);
-console.log(user.log(2));
-console.log(user.roleId);
-console.log(user.skills);
+//analog cu 'type'
+// type User2 = { //deja type asa nu poate ne da eroare
+//   name: string;
+// }
 
-interface UserDictionary {
-  [index: number]: User;
+// type User2 = {//ne da eroare: dublicate la identificator
+//   age: number,
+
+// }
+
+// const user2 :User2 ={
+//   name:'andrew2',
+//   age: 36
+// }
+
+// console.log(user2) 
+
+//avantajele lui type
+type ID = string | number
+
+//analog cu interface
+interface IDi {
+  ID: string | number
 }
 
-//Analog
-type UserDictionary2 = {
-  [index: number]: User;
-};
+/* Recomandatsie 
+Pentru toate obiectele de folosit 'Inetrface',
+dar cind ne trebuie type alias cu tupiuri primitive 
+atunci folosim 'type,*/
