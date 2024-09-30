@@ -1,45 +1,41 @@
 interface User {
-  name: string;
+  login: string;
+  password?: string; //'?' parola este optionala
 }
 
-interface User {
-  age: number,
+const userAndrew: User = {
+  login: "andrew@g,ail.com",
+  password: "123", //putem sa nu indicam cimpul cu parola
+};
 
+
+//exemplu 2
+function multiply(fisrt: number, second?: number):number {
+  //second il facem optional
+  if (!second){
+    return fisrt * fisrt
+  }
+  return fisrt * second
 }
 
-const user :User ={
-  name:'andrew',
-  age: 35
+console.log(multiply(5))
+console.log(multiply(5,6))
+
+//exemplu 3
+interface UserPro {
+  login: string;
+  password?: {
+    type: 'primary' | 'secundary'
+  }
 }
 
-console.log(user)
-
-//analog cu 'type'
-// type User2 = { //deja type asa nu poate ne da eroare
-//   name: string;
-// }
-
-// type User2 = {//ne da eroare: dublicate la identificator
-//   age: number,
-
-// }
-
-// const user2 :User2 ={
-//   name:'andrew2',
-//   age: 36
-// }
-
-// console.log(user2) 
-
-//avantajele lui type
-type ID = string | number
-
-//analog cu interface
-interface IDi {
-  ID: string | number
+function testPassword(userAndrew2 : UserPro){
+  const t = userAndrew2.password?.type;
+  console.log(t)
 }
 
-/* Recomandatsie 
-Pentru toate obiectele de folosit 'Inetrface',
-dar cind ne trebuie type alias cu tupiuri primitive 
-atunci folosim 'type,*/
+function test(param?: string){
+  const t= param ?? multiply(5)
+  console.log(t)
+}
+

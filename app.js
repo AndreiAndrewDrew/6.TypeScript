@@ -1,6 +1,15 @@
 "use strict";
-const user = {
-    name: 'andrew',
-    age: 35
+const userAndrew = {
+    login: "andrew@g,ail.com",
+    password: "123", //putem sa nu indicam cimpul cu parola
 };
-console.log(user);
+//exemplu 2
+function multiply(fisrt, second) {
+    //second il facem optional
+    if (!second) {
+        return fisrt * fisrt;
+    }
+    return fisrt * second;
+}
+console.log(multiply(5));
+console.log(multiply(5, 6));
