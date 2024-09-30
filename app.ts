@@ -1,16 +1,36 @@
-enum RequestType{
-  GET = 'get',
-  POST = 'post'
-}
-//de fieacre data de facut enum..nu este optimal
+type hhtpMethod = "post" | "get";
 
+type coolString = string;
+//Alias aduagtor pentru string
 
-function fetchWithAuth(url: string, method: RequestType){
-}
-
-//exemplu 2 analog
-function fetchWithAuth2(url: string, method: 'post' | 'get'){
+function fetchWithAuth(url: string, method: hhtpMethod) {
+  return 1;
 }
 
-fetchWithAuth2('s','get')//get sau post..altceva da eroare
-// fetchWithAuth2('s','af')//eroare
+fetchWithAuth("s", "get");
+
+let methode = "post";
+
+fetchWithAuth("s", methode as "post");
+
+//Exemplu 2 Tipizatsia Obiectelor
+type User = {
+  name: string; //daca si aici este cimp name
+  age: number;
+  skills: string[];
+};
+
+type Role ={
+  name: string; //si aici avem cimp name
+  id: number;
+}
+
+type UserWithRole = User & Role; //Intersectie a 2 tipizatsii
+
+
+let user: UserWithRole = {
+  name: "Andrew", //declaram odata name, e
+  age: 34,
+  skills: ["1", "2"],
+  id: 1
+};
