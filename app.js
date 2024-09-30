@@ -1,14 +1,15 @@
 "use strict";
-//Alias aduagtor pentru string
-function fetchWithAuth(url, method) {
-    return 1;
-}
-fetchWithAuth("s", "get");
-let methode = "post";
-fetchWithAuth("s", methode);
 let user = {
-    name: "Andrew", //declaram odata name, e
+    name: "Andrew",
     age: 34,
     skills: ["1", "2"],
-    id: 1
+    roleId: 1,
+    createdAt: new Date(),
+    log(id) {
+        return `Functia 'log' cu id=${id}`;
+    },
 };
+console.log(user);
+console.log(user.log(2));
+console.log(user.roleId);
+console.log(user.skills);
