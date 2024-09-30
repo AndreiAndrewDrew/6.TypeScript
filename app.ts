@@ -1,41 +1,31 @@
-interface User {
-  login: string;
-  password?: string; //'?' parola este optionala
+function logID(id: string | number): void {
+  //void- asat inseamna ca nu intoarce nimik
+  console.log(id);
 }
 
-const userAndrew: User = {
-  login: "andrew@g,ail.com",
-  password: "123", //putem sa nu indicam cimpul cu parola
+const a = logID(1);
+
+function multiply(f: number, s?: number) {
+  if (!s) {
+    return f * f;
+  }
+}
+
+type voidFunction = () => void;
+
+const f1: voidFunction = () => {};
+
+const f2: voidFunction = () => {
+  return true; //ce nu am intorce orcicum primim void
 };
 
+const b = f2() //b va fi de tip void
 
-//exemplu 2
-function multiply(fisrt: number, second?: number):number {
-  //second il facem optional
-  if (!second){
-    return fisrt * fisrt
-  }
-  return fisrt * second
+//exemplu de folosire a void
+const skills =['Dev','DevOps']
+const user ={
+  s:['']
 }
 
-console.log(multiply(5))
-console.log(multiply(5,6))
-
-//exemplu 3
-interface UserPro {
-  login: string;
-  password?: {
-    type: 'primary' | 'secundary'
-  }
-}
-
-function testPassword(userAndrew2 : UserPro){
-  const t = userAndrew2.password?.type;
-  console.log(t)
-}
-
-function test(param?: string){
-  const t= param ?? multiply(5)
-  console.log(t)
-}
-
+skills.forEach((skill) =>user.s.push(skill));
+//forEach nu intoarce nimik, void

@@ -1,24 +1,23 @@
 "use strict";
-const userAndrew = {
-    login: "andrew@g,ail.com",
-    password: "123", //putem sa nu indicam cimpul cu parola
-};
-//exemplu 2
-function multiply(fisrt, second) {
-    //second il facem optional
-    if (!second) {
-        return fisrt * fisrt;
+function logID(id) {
+    //void- asat inseamna ca nu intoarce nimik
+    console.log(id);
+}
+const a = logID(1);
+function multiply(f, s) {
+    if (!s) {
+        return f * f;
     }
-    return fisrt * second;
 }
-console.log(multiply(5));
-console.log(multiply(5, 6));
-function testPassword(userAndrew2) {
-    var _a;
-    const t = (_a = userAndrew2.password) === null || _a === void 0 ? void 0 : _a.type;
-    console.log(t);
-}
-function test(param) {
-    const t = param !== null && param !== void 0 ? param : multiply(5);
-    console.log(t);
-}
+const f1 = () => { };
+const f2 = () => {
+    return true; //ce nu am intorce orcicum primim void
+};
+const b = f2(); //b va fi de tip void
+//exemplu de folosire a void
+const skills = ['Dev', 'DevOps'];
+const user = {
+    s: ['']
+};
+skills.forEach((skill) => user.s.push(skill));
+//forEach nu intoarce nimik, void
