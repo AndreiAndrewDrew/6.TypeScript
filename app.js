@@ -1,23 +1,33 @@
 "use strict";
-function logID(id) {
-    //void- asat inseamna ca nu intoarce nimik
-    console.log(id);
-}
-const a = logID(1);
-function multiply(f, s) {
-    if (!s) {
-        return f * f;
+const user = {
+    name: "vasile",
+    email: "vasili@gmail.com",
+    login: "vasilica",
+};
+function logId(id) {
+    if (isString(id)) { //se foloseste functia 'isString' TypeGuard
+        console.log(id); //id este string
+    }
+    else {
+        console.log(id); //id este number 
     }
 }
-const f1 = () => { };
-const f2 = () => {
-    return true; //ce nu am intorce orcicum primim void
-};
-const b = f2(); //b va fi de tip void
-//exemplu de folosire a void
-const skills = ['Dev', 'DevOps'];
-const user = {
-    s: ['']
-};
-skills.forEach((skill) => user.s.push(skill));
-//forEach nu intoarce nimik, void
+//creem functei simpla de Type Guard
+function isString(x) {
+    return typeof x === "string";
+}
+//Functia typeGuard 'isAdmin'
+function isAdmin(user) {
+    return 'role' in user;
+}
+function isAdminAlternative(user) {
+    return user.role !== undefined;
+}
+function setRoleZero(user) {
+    if (isAdmin(user)) {
+        user.role = 0;
+    }
+    else {
+        throw new Error('utilizaturl nu este Admin');
+    }
+}
