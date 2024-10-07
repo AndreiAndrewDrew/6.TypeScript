@@ -1,34 +1,48 @@
-let input: unknown; //declaram o vriabila 'input' de tip unknown
+//Exemplu 1 de folosire a tipului 'never'
+function genearteError(mesaj: string) : never{
+  throw new Error(mesaj)
+} 
 
-input = 3;
-input = ["dads", "rwwef"];
+//Ex.2
+function dumpError(): never{
+  // return ''; //ne da eroare
+  while(true){
 
-// let res:string = input; //ne da eroare
-//pute sa includem tipul 'unknown' numai in 'unknown' sau in 'any'
-let res: any = input; //asa nu ne da eroare
-
-//alt exemplu
-function run(i: unknown) {
-  if (typeof i == "number") {
-    i++;
-  } else {
-    i;
   }
 }
 
-run(input);
-
-//exemplu de folosire in practica a tipului 'unknow'
-async function getData() {
-  try {
-    await fetch("");
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-    }
-  }
+//Ex3
+function recursie(): never{
+  return recursie()
 }
 
-type U1 = unknown | number; //union, U1 devine tat timpul 'unknown'
+//Ex.4
+type paymentAction ='refund' | 'checkout' | 'reject'
 
-type I1 = unknown & string; //intersection, I1 este 'string'
+function processAction(action: paymentAction){
+   switch(action){
+    case 'refund':
+      //..ceva executam
+      break;
+    case 'checkout':
+      //..
+      break;
+    case 'reject':
+      //..
+      break;
+    default:
+      const _: never = action
+      throw new Error('Nu exista asa actsiune.')
+   }
+}
+
+//Ex.5
+function isString(x: string | number): boolean{
+  if (typeof x === 'string'){
+    return true;
+  }else if(typeof x === 'number') {
+    return false;
+  }
+  genearteError('sfasfjs') //functia din Ex.1 de mai sus
+
+}
