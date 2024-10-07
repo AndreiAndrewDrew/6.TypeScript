@@ -1,31 +1,34 @@
-function logID(id: string | number): void {
-  //void- asat inseamna ca nu intoarce nimik
-  console.log(id);
-}
+let input: unknown; //declaram o vriabila 'input' de tip unknown
 
-const a = logID(1);
+input = 3;
+input = ["dads", "rwwef"];
 
-function multiply(f: number, s?: number) {
-  if (!s) {
-    return f * f;
+// let res:string = input; //ne da eroare
+//pute sa includem tipul 'unknown' numai in 'unknown' sau in 'any'
+let res: any = input; //asa nu ne da eroare
+
+//alt exemplu
+function run(i: unknown) {
+  if (typeof i == "number") {
+    i++;
+  } else {
+    i;
   }
 }
 
-type voidFunction = () => void;
+run(input);
 
-const f1: voidFunction = () => {};
-
-const f2: voidFunction = () => {
-  return true; //ce nu am intorce orcicum primim void
-};
-
-const b = f2() //b va fi de tip void
-
-//exemplu de folosire a void
-const skills =['Dev','DevOps']
-const user ={
-  s:['']
+//exemplu de folosire in practica a tipului 'unknow'
+async function getData() {
+  try {
+    await fetch("");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
 }
 
-skills.forEach((skill) =>user.s.push(skill));
-//forEach nu intoarce nimik, void
+type U1 = unknown | number; //union, U1 devine tat timpul 'unknown'
+
+type I1 = unknown & string; //intersection, I1 este 'string'
