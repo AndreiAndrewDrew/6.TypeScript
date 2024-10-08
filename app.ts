@@ -1,46 +1,26 @@
-interface User {
+class User{
   name: string;
-  email: string;
-  login: string;
+
+  constructor(name:string){
+    this.name = name;
+  }
 }
 
-const user: User = {
-  name: "vasile",
-  email: "vasili@gmail.com",
-  login: "vasilica",
-};
+const utilizator = new User('Vasea')
+console.log(utilizator)
+utilizator.name = 'Petrica'
+console.log(utilizator)
 
-interface Admin {
-  name: string;
+class Admin{//declaram fara constructor,
+  //pentru asta este ncesar in fisierul 'tsconfig.json'
+  //Gasim cimpul "strictPropertyInitialization" po default el este 'true',
+  //Il descomentam si ii atribuim valoare 'false'. 
+  //Rezulta ca de constructor nu este deja necesar!!!
   role: number;
 }
 
-function logId(id: string | number) {
-  if (isString(id)) { //se foloseste functia 'isString' TypeGuard
-    console.log(id);//id este string
-  } else {
-    console.log(id);//id este number 
-  }
-}
+const administrator = new Admin()
+administrator.role =1
+console.log(administrator);
+console.log(administrator.role)
 
-//creem functei simpla de Type Guard
-function isString(x: string | number): x is string{
-  return typeof x === "string";
-}
-
-//Functia typeGuard 'isAdmin'
-function isAdmin(user: User | Admin):user is Admin{
-  return 'role' in user;
-}
-
-function isAdminAlternative(user: User | Admin):user is Admin{
-  return (user as Admin).role !== undefined;
-}
-
-function setRoleZero(user: User | Admin){
-  if (isAdmin(user)){
-    user.role = 0
-  } else{
-    throw new Error('utilizaturl nu este Admin')
-  }
-}

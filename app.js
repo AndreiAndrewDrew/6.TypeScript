@@ -1,33 +1,16 @@
 "use strict";
-const user = {
-    name: "vasile",
-    email: "vasili@gmail.com",
-    login: "vasilica",
-};
-function logId(id) {
-    if (isString(id)) { //se foloseste functia 'isString' TypeGuard
-        console.log(id); //id este string
-    }
-    else {
-        console.log(id); //id este number 
+class User {
+    constructor(name) {
+        this.name = name;
     }
 }
-//creem functei simpla de Type Guard
-function isString(x) {
-    return typeof x === "string";
+const utilizator = new User('Vasea');
+console.log(utilizator);
+utilizator.name = 'Petrica';
+console.log(utilizator);
+class Admin {
 }
-//Functia typeGuard 'isAdmin'
-function isAdmin(user) {
-    return 'role' in user;
-}
-function isAdminAlternative(user) {
-    return user.role !== undefined;
-}
-function setRoleZero(user) {
-    if (isAdmin(user)) {
-        user.role = 0;
-    }
-    else {
-        throw new Error('utilizaturl nu este Admin');
-    }
-}
+const administrator = new Admin();
+administrator.role = 1;
+console.log(administrator);
+console.log(administrator.role);
