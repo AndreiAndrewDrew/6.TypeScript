@@ -1,29 +1,34 @@
-class User{
-  name: string;
-  age: number;
+enum PaymentStatus {
+  Holded,
+  Processed,
+  Reversed,
+}
 
-  constructor();
-  constructor(name:string)
-  constructor(age: number);
-  constructor(name:string, age:number);
-  //constructor de implementare
-  constructor(ageOrName?:string | number, age?:number){
-    if (typeof ageOrName === 'string'){
-      this.name = ageOrName;
-    }else if(typeof ageOrName === 'number'){
-      this.age = ageOrName
+class Payment {
+  id: number;
+  status: PaymentStatus = PaymentStatus.Holded; //facem valoare po defaultu
+  createdAt: Date = new Date(); //facem valoare po defaultu
+  updatedAt: Date;
+
+  constructor(id: number) {
+    this.id = id;
+  }
+
+  getPaymentLifeTime(): number {
+    return new Date().getTime() - this.createdAt.getTime();
+  }
+
+  unholdPayment() {
+    if (this.status === PaymentStatus.Processed) {
+      throw new Error("Plata nu poate fi returnata");
     }
-    if (typeof age === 'number'){
-      this.age =age
-    }
+    this.status = PaymentStatus.Reversed;
+    this.updatedAt = new Date();
   }
 }
 
-const user1 = new User()
-console.log(user1)
-const user2 = new User('Vasea')
-console.log(user2)
-const user3 = new User(33)
-console.log(user3)
-const user4 = new User('Andrew',38)
-console.log(user4)
+const payment = new Payment(1);
+payment.unholdPayment();
+console.log(payment);
+const time = payment.getPaymentLifeTime();
+console.log("Timpul tranzactie(s)=", time);
