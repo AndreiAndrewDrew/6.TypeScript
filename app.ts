@@ -1,34 +1,27 @@
-enum PaymentStatus {
-  Holded,
-  Processed,
-  Reversed,
-}
+class User {
+  skills: string[];
 
-class Payment {
-  id: number;
-  status: PaymentStatus = PaymentStatus.Holded; //facem valoare po defaultu
-  createdAt: Date = new Date(); //facem valoare po defaultu
-  updatedAt: Date;
-
-  constructor(id: number) {
-    this.id = id;
-  }
-
-  getPaymentLifeTime(): number {
-    return new Date().getTime() - this.createdAt.getTime();
-  }
-
-  unholdPayment() {
-    if (this.status === PaymentStatus.Processed) {
-      throw new Error("Plata nu poate fi returnata");
+  //Perezagruzka pentru metode
+  addSkill(skill: string): void;
+  addSkill(skills: string[]): void;
+  addSkill(skillOrSkills: string | string[]): void {
+    if (typeof skillOrSkills == "string") {
+      this.skills.push(skillOrSkills);
+    } else {
+      this.skills.concat(skillOrSkills);
     }
-    this.status = PaymentStatus.Reversed;
-    this.updatedAt = new Date();
   }
 }
 
-const payment = new Payment(1);
-payment.unholdPayment();
-console.log(payment);
-const time = payment.getPaymentLifeTime();
-console.log("Timpul tranzactie(s)=", time);
+//perezagruzka pentru functie
+function run(distance: number): number;
+function run(distance: string): string;
+function run(distance: number | string): number | string {
+  if(typeof distance == 'number'){
+    return 1;
+  }else{
+    return '';
+  }
+}
+
+run()
