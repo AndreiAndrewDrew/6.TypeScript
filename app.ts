@@ -1,38 +1,68 @@
-type PaymentStatus2 ='new'|'paid';
+type PaymentStatus2 = "new" | "paid";
 
-class Payment{
+class Payment {
   id: number;
-  status: PaymentStatus2 = 'new'
+  status: PaymentStatus2 = "new";
 
-  constructor(id: number){
+  constructor(id: number) {
     this.id = id;
   }
 
-  pay(){
-    this.status='paid'
+  pay() {
+    this.status = "paid";
   }
 }
 
-class PersistedPayment extends Payment{ //largim clasa existenta
+class PersistedPayment extends Payment {
+  //largim clasa existenta
   dataBaseId: number;
   payedAt: Date;
 
-  constructor (){
+  constructor() {
     const id = Math.random();
-    super(id);//apelam la constructurul clasei Payment
+    super(id); //apelam la constructurul clasei Payment
   }
 
-  save(){
+  save() {
     //Salvam in baza
   }
 
-  override pay(date?: Date){
-    super.pay()
-    if (date){
-      this.payedAt= date;
+  override pay(date?: Date) {
+    super.pay();
+    if (date) {
+      this.payedAt = date;
     }
   }
-} 
+}
 
-new Payment().
-new PersistedPayment().
+// new Payment()
+// new PersistedPayment()
+
+class User {
+  name: string = "user";
+
+  constructor() {
+    console.log(this.name);
+  }
+}
+
+class Admin extends User {
+  name: string = "admin";
+
+  constructor() {
+    super();
+    console.log(this.name);
+  }
+}
+
+new Admin();
+
+new Error("Eroare");
+
+class httpError extends Error {
+  code: number;
+  constructor(message: string, code?: number) {
+    super(message);
+    this.code = code ?? 500;
+  }
+}
