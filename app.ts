@@ -1,24 +1,33 @@
-class User{
-  _login: string;
-  password: string;
-  createdAt: Date;
+interface ILogger {
+  log(...args:any[]): void;
+  error(...args:any[]): void;
+}
 
-  set login(l:string | number){
-    this._login = 'user-' +l;
-    this.createdAt = new Date()
+class Logger implements ILogger {
+  log(...args: any[]): void {
+    console.log(...args);
   }
-
-  get login(){
-    return this._login;
-  }
-
-  async getPassword(p: string){
-
+  async error(...args: any[]): Promise<void> {
+    //Aruncam in sisteme externa
+    console.log(...args);
   }
 }
 
-//'user-'
-const user = new User();
-user.login = 'myLogin';
-console.log(user);
-console.log(user.login)
+interface IPayable {
+  pay(paymentId: number): void;
+  price?: number;
+}
+
+interface IDeletable {
+  delete():void;
+}
+
+class User implements IPayable, IDeletable{
+  delete(): void {
+    throw new Error("Method not implemented.");
+  }
+  pay(paymentId: number|string): void{
+    ////
+  } 
+}
+
