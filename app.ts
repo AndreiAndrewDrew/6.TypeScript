@@ -1,57 +1,46 @@
-class User {
-  name: string 
+class Vehicle {
+  make: string;
+  private demages: string[]=[];
+  private _model: string;
+  protected run: number;//face ca sa se mosteneasca numai urmashilor, 
+  //si nu este accesibil din exterior 
+  #price: number; //'#' analag la private
 
-  constructor(name: string) {
-    this.name = name;
+  set model(m:string){
+    this._model = m;
+    this.#price = 100;
+  }
+
+  get model(){
+    return this._model;
+  }
+
+  isPriceEqual(v: Vehicle){
+    return this.#price === v.#price; //Controlam daca 2 proprietatsi sunt egale
+  }
+
+  addDamages(damage: string){
+    this.demages.push(damage)
   }
 }
 
-//Mostenire
-class Users extends Array<User>{
-  searcByName(name: string){
-    return this.filter(u=>u.name === name);
-  }
-
-  override toString(): string{
-    return this.map(u=>u.name).join(', ')
+class EuroTruck extends Vehicle{
+  setRun(km: number){
+    // this.#price = 100; //aici nu putem accesa da eroare
+    this.run = km /0.62; //avem acces la protected ca si la public
+    //this.damages //errore -nu avem acces la demages
   }
 }
-//End Mostenire
 
-const users = new Users();
-users.push(new User('Andrew'))
-users.push(new User('Vasile'))
-users.push(new User('Aliona'))
-console.log(users.toString())
-
-//Compozitie
-class UsersList{
-  users: User[];
-
-  push(u: User){
-    this.users.push(u);
-  }
-}
-//end Compozitsie
+new Vehicle();
+new EuroTruck();
 
 
-//Exemplu 2
+const car1 = new Vehicle()
+car1.make='Toyota Center';
+car1.model='Corolla';
+car1.addDamages('New Vehicel - 0% Demage');
 
-class Payment{
-  date:Date;
-}
+console.log(car1)
 
-class UserWithPayment extends Payment{ //mostenire
-  name:string;
-}
 
-class UserWithPayment2 {//Compozitsie
-  user: User;
-  payment: Payment;
-
-  constructor(user: User, payment: Payment){
-    this.payment = payment;
-    this.user = user;
-  }
-
-}
