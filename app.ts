@@ -1,68 +1,57 @@
-type PaymentStatus2 = "new" | "paid";
-
-class Payment {
-  id: number;
-  status: PaymentStatus2 = "new";
-
-  constructor(id: number) {
-    this.id = id;
-  }
-
-  pay() {
-    this.status = "paid";
-  }
-}
-
-class PersistedPayment extends Payment {
-  //largim clasa existenta
-  dataBaseId: number;
-  payedAt: Date;
-
-  constructor() {
-    const id = Math.random();
-    super(id); //apelam la constructurul clasei Payment
-  }
-
-  save() {
-    //Salvam in baza
-  }
-
-  override pay(date?: Date) {
-    super.pay();
-    if (date) {
-      this.payedAt = date;
-    }
-  }
-}
-
-// new Payment()
-// new PersistedPayment()
-
 class User {
-  name: string = "user";
+  name: string 
 
-  constructor() {
-    console.log(this.name);
+  constructor(name: string) {
+    this.name = name;
   }
 }
 
-class Admin extends User {
-  name: string = "admin";
+//Mostenire
+class Users extends Array<User>{
+  searcByName(name: string){
+    return this.filter(u=>u.name === name);
+  }
 
-  constructor() {
-    super();
-    console.log(this.name);
+  override toString(): string{
+    return this.map(u=>u.name).join(', ')
   }
 }
+//End Mostenire
 
-new Admin();
+const users = new Users();
+users.push(new User('Andrew'))
+users.push(new User('Vasile'))
+users.push(new User('Aliona'))
+console.log(users.toString())
 
-new Error("Eroare");
+//Compozitie
+class UsersList{
+  users: User[];
 
-class httpError extends Error {
-  code: number;
-  constructor(message: string, code?: number) {
-    super(message);
-    this.code = code ?? 500;
+  push(u: User){
+    this.users.push(u);
   }
+}
+//end Compozitsie
+
+
+//Exemplu 2
+
+class Payment{
+  date:Date;
+}
+
+class UserWithPayment extends Payment{ //mostenire
+  name:string;
+}
+
+class UserWithPayment2 {//Compozitsie
+  user: User;
+  payment: Payment;
+
+  constructor(user: User, payment: Payment){
+    this.payment = payment;
+    this.user = user;
+  }
+
 }
