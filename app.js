@@ -1,22 +1,16 @@
 "use strict";
-class UserBuilder {
-    setName(name) {
-        this.name = name;
-        return this;
-    }
-    //typeGuard
-    isAdmin() {
-        return this instanceof AdminBuilder;
+class Controller {
+    handleWhitLogs(req) {
+        console.log("Start");
+        this.handle(req);
+        console.log("End");
     }
 }
-class AdminBuilder extends UserBuilder {
+class UserController extends Controller {
+    handle(req) {
+        console.log(req);
+    }
 }
-const res = new UserBuilder().setName("Vasile");
-const res2 = new AdminBuilder().setName("Vasile Admin");
-let user = new UserBuilder();
-if (user.isAdmin()) {
-    console.log(user);
-}
-else {
-    console.log(user);
-}
+//new Controller()-errore
+const uc = new UserController();
+uc.handleWhitLogs('Request');
