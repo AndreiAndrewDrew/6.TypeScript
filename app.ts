@@ -1,46 +1,21 @@
-class Vehicle {
-  make: string;
-  private demages: string[]=[];
-  private _model: string;
-  protected run: number;//face ca sa se mosteneasca numai urmashilor, 
-  //si nu este accesibil din exterior 
-  #price: number; //'#' analag la private
+class UserService {
+  static db: any;
 
-  set model(m:string){
-    this._model = m;
-    this.#price = 100;
+  static getUser(id: number) {
+    return UserService.db.findById(id);
   }
 
-  get model(){
-    return this._model;
+  create() {
+    UserService.db;
   }
 
-  isPriceEqual(v: Vehicle){
-    return this.#price === v.#price; //Controlam daca 2 proprietatsi sunt egale
-  }
-
-  addDamages(damage: string){
-    this.demages.push(damage)
+  static{
+    UserService.db='asdfgdf' //se executa cins pornim codul nostru
   }
 }
 
-class EuroTruck extends Vehicle{
-  setRun(km: number){
-    // this.#price = 100; //aici nu putem accesa da eroare
-    this.run = km /0.62; //avem acces la protected ca si la public
-    //this.damages //errore -nu avem acces la demages
-  }
-}
+UserService.db; //nu trebuie sa creem instam, apelam proprietate 'db' analog ca de la un obiect
+UserService.getUser(1);
 
-new Vehicle();
-new EuroTruck();
-
-
-const car1 = new Vehicle()
-car1.make='Toyota Center';
-car1.model='Corolla';
-car1.addDamages('New Vehicel - 0% Demage');
-
-console.log(car1)
-
-
+const inst = new UserService();
+inst.create();
