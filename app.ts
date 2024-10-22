@@ -1,21 +1,33 @@
-class UserService {
-  static db: any;
+class Payment{
+  private date: Date = new Date()
 
-  static getUser(id: number) {
-    return UserService.db.findById(id);
+  getDate(this: Payment){
+    return this.date
   }
 
-  create() {
-    UserService.db;
-  }
-
-  static{
-    UserService.db='asdfgdf' //se executa cins pornim codul nostru
+  getDateArrow = () =>{
+    return this.date;
   }
 }
 
-UserService.db; //nu trebuie sa creem instam, apelam proprietate 'db' analog ca de la un obiect
-UserService.getUser(1);
+const p1 = new Payment()
 
-const inst = new UserService();
-inst.create();
+const user ={
+  id: 1,
+  paymentDate: p1.getDate.bind(p1),
+  paymentDateArrow: p1.getDateArrow 
+}
+
+// console.log(p1.getDate())
+// console.log(user.paymentDate())
+// console.log(user.paymentDateArrow())
+
+class PaymentPersistent extends Payment{
+  save() {
+      // return super.getDate() //cu super apelam la clasa parinte, adica din 'Payment';
+      //la functia simpla 'getDate()'
+      return this.getDateArrow() //ca sa apelam la functie strelocinaiae, apelam cu 'this'
+  }
+}
+
+console.log(new PaymentPersistent().save())
