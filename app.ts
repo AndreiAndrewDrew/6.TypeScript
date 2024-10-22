@@ -1,33 +1,28 @@
-class Payment{
-  private date: Date = new Date()
+class UserBuilder {
+  name: string;
 
-  getDate(this: Payment){
-    return this.date
+  setName(name: string): this {
+    this.name = name;
+    return this;
   }
 
-  getDateArrow = () =>{
-    return this.date;
-  }
-}
-
-const p1 = new Payment()
-
-const user ={
-  id: 1,
-  paymentDate: p1.getDate.bind(p1),
-  paymentDateArrow: p1.getDateArrow 
-}
-
-// console.log(p1.getDate())
-// console.log(user.paymentDate())
-// console.log(user.paymentDateArrow())
-
-class PaymentPersistent extends Payment{
-  save() {
-      // return super.getDate() //cu super apelam la clasa parinte, adica din 'Payment';
-      //la functia simpla 'getDate()'
-      return this.getDateArrow() //ca sa apelam la functie strelocinaiae, apelam cu 'this'
+  //typeGuard
+  isAdmin(): this is AdminBuilder {
+    return this instanceof AdminBuilder;
   }
 }
 
-console.log(new PaymentPersistent().save())
+class AdminBuilder extends UserBuilder {
+  roles: string[];
+}
+
+const res = new UserBuilder().setName("Vasile");
+const res2 = new AdminBuilder().setName("Vasile Admin");
+
+let user: UserBuilder | AdminBuilder = new UserBuilder();
+
+if (user.isAdmin()) {
+  console.log(user);
+} else {
+  console.log(user);
+}
