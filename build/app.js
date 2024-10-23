@@ -1,16 +1,15 @@
 "use strict";
-class Controller {
-    handleWhitLogs(req) {
-        console.log("Start");
-        this.handle(req);
-        console.log("End");
-    }
+function logMiddleware(data) {
+    //prima functie care lucreaza cu genericul
+    console.log(data);
+    return data;
 }
-class UserController extends Controller {
-    handle(req) {
-        console.log(req);
-    }
+const res = logMiddleware(10);
+//Exemolu 2
+function getSplitedHalf(masiv) {
+    const lungJumMasiv = masiv.length / 2;
+    return masiv.splice(0, lungJumMasiv);
+    // return masiv.splice(lungJumMasiv,masiv.length);
 }
-//new Controller()-errore
-const uc = new UserController();
-uc.handleWhitLogs('Request');
+console.log(getSplitedHalf([1, 2, 3, 4]));
+console.log(getSplitedHalf([1, 3, "dasd", true, "232", 23, 24, 6]));
