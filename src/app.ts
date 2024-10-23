@@ -1,19 +1,15 @@
-abstract class Controller {
-  abstract handle(req: any): void;
-
-  handleWhitLogs(req: any) {
-    console.log("Start");
-    this.handle(req);
-    console.log("End");
+function test(a: number): number | undefined {
+  if (a > 0) {
+    return a;
   }
 }
 
-class UserController extends Controller {
-  handle(req: any): void {
-    console.log(req);
-  }
+//Exemplu 2
+function test2(a: number) {
+    return a;
 }
 
-//new Controller()-errore
-const uc = new UserController();
-uc.handleWhitLogs('Request')
+type StrOrNumFunct = (a: number | string) => number;
+
+// let f:StrOrNumFunct = test2;
+
