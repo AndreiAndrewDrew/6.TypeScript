@@ -1,17 +1,31 @@
 "use strict";
-class Vehicle {
+class List {
+    constructor(items) {
+        this.items = items;
+    }
 }
-function kmToMiles(vehicle) {
-    vehicle.run = vehicle.run / 0.62;
-    return vehicle;
+class Accardion {
 }
-class LCV extends Vehicle {
+//asta asa facem daca folosim mostenirea
+class ExtendedListClass extends List {
+    first() {
+        return this.items[0];
+    }
 }
-const vehicle = kmToMiles(new Vehicle());
-const lcv = kmToMiles(new LCV());
-kmToMiles({ run: 1 });
-//Ex.2
-function logId(id) {
-    console.log(id);
-    return id;
+//acuma cu 'mixins'
+function ExtendedList(Base) {
+    return class ExtendedList extends Base {
+        first() {
+            return this.items[0];
+        }
+    };
 }
+class AccardionList {
+    constructor(items) {
+        this.items = items;
+    }
+}
+const list = ExtendedList(AccardionList);
+const res = new list(["first", "second"]);
+console.log(res.first());
+console.log(res.isOpen); //avem acces la 'isOpen'

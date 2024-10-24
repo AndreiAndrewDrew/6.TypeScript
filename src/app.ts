@@ -1,27 +1,40 @@
-class Resp<D, E> {
-  data?: D;
-  error?: E;
+type Constructor = new (...args: any[]) => {};
+type GConstructor<T = {}> = new (...args: any[]) => T;
 
-  constructor(data?: D, error?: E) {
-    if (data) {
-      this.data = data;
-    }
-    if (error) {
-      this.error = error;
-    }
+class List {
+  constructor(public items: string[]) {}
+}
+
+class Accardion {
+  isOpen: boolean;
+}
+
+type ListType = GConstructor<List>;
+type AccardionType = GConstructor<Accardion>;
+
+//asta asa facem daca folosim mostenirea
+class ExtendedListClass extends List {
+  first() {
+    return this.items[0];
   }
 }
 
-const res = new Resp<string, number>('data') 
-
-//Ex.2
-class HTTPResp extends Resp<string, number>{
-  code: number;
-
-  setCode(code: number){
-    this.code = code;
-  }
+//acuma cu 'mixins'
+function ExtendedList<TBase extends ListType & AccardionType>(Base: TBase) {
+  return class ExtendedList extends Base {
+    first() {
+      return this.items[0];
+    }
+  };
 }
 
-const res2 = new HTTPResp()
-res2.
+class AccardionList{
+  isOpen: boolean;
+  constructor(public items: string[]) {}
+}
+
+const list = ExtendedList(AccardionList);
+const res = new list(["first", "second"]);
+console.log(res.first());
+console.log(res.isOpen);//avem acces la 'isOpen'
+
