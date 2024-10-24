@@ -16,3 +16,23 @@ function getSplitedHalf<T>(masiv: Array<T>): Array<T> {
 console.log(getSplitedHalf<number>([1, 2, 3, 4]));
 
 console.log(getSplitedHalf([1, 3, "dasd", true, "232", 23, 24, 6]));
+
+const split: <T>(data: Array<T>) =>Array<T> = getSplitedHalf;
+
+//Exemplu 3
+interface ILogLine<T>{ //folosirea genericurilor in interfatsa
+  timeStamp: Date,
+  data: T
+}
+//analogic cu typurile
+type LogLineType<T> = {
+  timeStamp: Date,
+  data: T
+}
+
+const logLine:ILogLine<{a: number}> = {
+  timeStamp: new Date(),
+  data:{
+    a:1
+  }
+}
