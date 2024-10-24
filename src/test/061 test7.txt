@@ -1,0 +1,2 @@
+Trebuie de scris functia 'toString' care primeste orice tip de date,
+si intoarce string din aceste date. Dar daca nu reuseste intoarce 'undefined'
