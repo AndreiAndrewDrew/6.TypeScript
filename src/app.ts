@@ -1,38 +1,23 @@
-function logMiddleware<T>(data: T): T {
-  //prima functie care lucreaza cu genericul
-  console.log(data);
-  return data;
+class Vehicle {
+  run: number;
 }
 
-const res = logMiddleware<number>(10);
-
-//Exemolu 2
-function getSplitedHalf<T>(masiv: Array<T>): Array<T> {
-  const lungJumMasiv = masiv.length / 2;
-  return masiv.splice(0,lungJumMasiv);
-  // return masiv.splice(lungJumMasiv,masiv.length);
+function kmToMiles<T extends Vehicle>(vehicle: T): T {
+  vehicle.run = vehicle.run /0.62;
+  return vehicle;
 }
 
-console.log(getSplitedHalf<number>([1, 2, 3, 4]));
-
-console.log(getSplitedHalf([1, 3, "dasd", true, "232", 23, 24, 6]));
-
-const split: <T>(data: Array<T>) =>Array<T> = getSplitedHalf;
-
-//Exemplu 3
-interface ILogLine<T>{ //folosirea genericurilor in interfatsa
-  timeStamp: Date,
-  data: T
-}
-//analogic cu typurile
-type LogLineType<T> = {
-  timeStamp: Date,
-  data: T
+class LCV extends Vehicle{
+  capacity: number;
 }
 
-const logLine:ILogLine<{a: number}> = {
-  timeStamp: new Date(),
-  data:{
-    a:1
-  }
+const vehicle = kmToMiles(new Vehicle());
+const lcv = kmToMiles(new LCV())
+kmToMiles({run:1})
+
+//Ex.2
+function logId <T extends string | number>(id: T): T{
+  console.log(id);
+  return id
+  
 }
