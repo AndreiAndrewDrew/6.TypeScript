@@ -26,6 +26,6 @@ class AccardionList {
     }
 }
 const list = ExtendedList(AccardionList);
-const res = new list(["first", "second"]);
+const res = new list(['first', 'second']);
 console.log(res.first());
-console.log(res.isOpen); //avem acces la 'isOpen'
+console.log(res.items); //avem acces la 'isOpen'
