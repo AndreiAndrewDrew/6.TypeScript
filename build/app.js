@@ -1,31 +1,16 @@
 "use strict";
-class List {
-    constructor(items) {
-        this.items = items;
-    }
+const key = 'age'; //putem atribuie numai keie existenta
+//Exemplu de aplicarea "keyof"
+function getValue(obj, key) {
+    return obj[key];
 }
-class Accardion {
-}
-//asta asa facem daca folosim mostenirea
-class ExtendedListClass extends List {
-    first() {
-        return this.items[0];
-    }
-}
-//acuma cu 'mixins'
-function ExtendedList(Base) {
-    return class ExtendedList extends Base {
-        first() {
-            return this.items[0];
-        }
-    };
-}
-class AccardionList {
-    constructor(items) {
-        this.items = items;
-    }
-}
-const list = ExtendedList(AccardionList);
-const res = new list(['first', 'second']);
-console.log(res.first());
-console.log(res.items); //avem acces la 'isOpen'
+const user = {
+    name: 'Vasile',
+    age: 32,
+};
+const userName = getValue(user, 'name');
+//dar aici in loc de "name", putem face greseala
+//iata aici e si nevoie de "keyof", adica in fucntie mai sus
+const userAge = getValue(user, 'age');
+console.log('Nume-User:', userName + ';');
+console.log('Virsta-User:', userAge + ' ani.');

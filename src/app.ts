@@ -1,39 +1,26 @@
-type Constructor = new (...args: any[]) => {};
-type GConstructor<T = {}> = new (...args: any[]) => T;
-
-class List {
-  constructor(public items: string[]) {}
+interface IUser {
+  name: string;
+  age: number;
 }
 
-class Accardion {
-  isOpen: boolean;
+type KeysOfUser = keyof IUser;
+
+const key: KeysOfUser = 'age'; //putem atribuie numai keie existenta
+
+//Exemplu de aplicarea "keyof"
+function getValue<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
 }
 
-type ListType = GConstructor<List>;
-type AccardionType = GConstructor<Accardion>;
+const user: IUser = {
+  name: 'Vasile',
+  age: 32,
+};
 
-//asta asa facem daca folosim mostenirea
-class ExtendedListClass extends List {
-  first() {
-    return this.items[0];
-  }
-}
+const userName = getValue(user, 'name');
+//dar aici in loc de "name", putem face greseala
+//iata aici e si nevoie de "keyof", adica in fucntie mai sus
+const userAge = getValue(user, 'age');
 
-//acuma cu 'mixins'
-function ExtendedList<TBase extends ListType & AccardionType>(Base: TBase) {
-  return class ExtendedList extends Base {
-    first() {
-      return this.items[0];
-    }
-  };
-}
-
-class AccardionList {
-  isOpen: boolean;
-  constructor(public items: string[]) {}
-}
-
-const list = ExtendedList(AccardionList);
-const res = new list(['first', 'second']);
-console.log(res.first());
-console.log(res.items); //avem acces la 'isOpen'
+console.log('Nume-User:', userName + ';');
+console.log('Virsta-User:', userAge + ' ani.');
