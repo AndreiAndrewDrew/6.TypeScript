@@ -1,26 +1,29 @@
-interface IUser {
-  name: string;
-  age: number;
+let strOrNum: string | number;
+
+if (Math.random() > 0.5) {
+  strOrNum = 5;
+} else {
+  strOrNum = 'str';
 }
 
-type KeysOfUser = keyof IUser;
-
-const key: KeysOfUser = 'age'; //putem atribuie numai keie existenta
-
-//Exemplu de aplicarea "keyof"
-function getValue<T, K extends keyof T>(obj: T, key: K) {
-  return obj[key];
+if (typeof strOrNum === 'string') {
+  console.log(strOrNum);
+} else {
+  console.log(strOrNum);
 }
 
-const user: IUser = {
+let strOrNum2: typeof strOrNum;
+
+const user = {
   name: 'Vasile',
-  age: 32,
 };
 
-const userName = getValue(user, 'name');
-//dar aici in loc de "name", putem face greseala
-//iata aici e si nevoie de "keyof", adica in fucntie mai sus
-const userAge = getValue(user, 'age');
+type keyOfUser = keyof typeof user;
+//keia tipului userului
 
-console.log('Nume-User:', userName + ';');
-console.log('Virsta-User:', userAge + ' ani.');
+enum Direction {
+  Up,
+  Down,
+}
+
+type d = keyof typeof Direction;
