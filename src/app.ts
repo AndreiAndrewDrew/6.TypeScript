@@ -1,29 +1,35 @@
-let strOrNum: string | number;
-
-if (Math.random() > 0.5) {
-  strOrNum = 5;
-} else {
-  strOrNum = 'str';
+interface Role {
+  name: string;
 }
 
-if (typeof strOrNum === 'string') {
-  console.log(strOrNum);
-} else {
-  console.log(strOrNum);
+interface Permission {
+  endDate: Date;
 }
 
-let strOrNum2: typeof strOrNum;
+interface User {
+  name: string;
+  roles: Role[];
+  permission: Permission;
+}
 
-const user = {
+const user: User = {
   name: 'Vasile',
+  roles: [],
+  permission: {
+    endDate: new Date(),
+  },
 };
 
-type keyOfUser = keyof typeof user;
-//keia tipului userului
+const nameUser = user['name'];
+const roleNames = 'roles';
+//aici lucram cu obiectele
 
-enum Direction {
-  Up,
-  Down,
-}
+type rolesType = User['roles'];
+type rolesType2 = User[typeof roleNames];
+//aici se afla tipurile, lucram cu tipurile
 
-type d = keyof typeof Direction;
+type roleType = User['roles'][number];
+type dateType = User['permission']['endDate'];
+
+const roles = ['admin', 'user', 'super-user'] as const;
+type roleType2 = (typeof roles)[number];
