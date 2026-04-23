@@ -1,35 +1,52 @@
-interface Role {
-  name: string;
+const a1: number = Math.random() > 0.5 ? 1 : 0;
+
+interface HTTPResponse<T extends 'success' | 'failed'> {
+  code: number;
+  data: T extends 'success' ? string : Error;
 }
 
-interface Permission {
-  endDate: Date;
-}
-
-interface User {
-  name: string;
-  roles: Role[];
-  permission: Permission;
-}
-
-const user: User = {
-  name: 'Vasile',
-  roles: [],
-  permission: {
-    endDate: new Date(),
-  },
+const suc: HTTPResponse<'success'> = {
+  code: 200,
+  data: 'done',
 };
 
-const nameUser = user['name'];
-const roleNames = 'roles';
-//aici lucram cu obiectele
+const err: HTTPResponse<'failed'> = {
+  code: 200,
+  data: new Error(),
+};
 
-type rolesType = User['roles'];
-type rolesType2 = User[typeof roleNames];
-//aici se afla tipurile, lucram cu tipurile
+//Exemplu
+class User {
+  id: number;
+  name: string;
+}
 
-type roleType = User['roles'][number];
-type dateType = User['permission']['endDate'];
+class UserPersistend extends User {
+  dbId: string;
+}
 
-const roles = ['admin', 'user', 'super-user'] as const;
-type roleType2 = (typeof roles)[number];
+function getUser(id: number): User;
+function getUser(dbId: string): UserPersistend;
+function getUser(dbIdOrId: string | number): User | UserPersistend {
+  if (typeof dbIdOrId === 'number') {
+    return new User();
+  } else {
+    return new UserPersistend();
+  }
+}
+
+//simplificam cu condition types
+type UserOrUserPersistend<T extends string | number> = T extends number
+  ? User
+  : UserPersistend;
+
+function getUser2<T extends string | number>(id: T): UserOrUserPersistend<T> {
+  if (typeof id === 'number') {
+    return new User() as UserOrUserPersistend<T>;
+  } else {
+    return new UserPersistend() as UserOrUserPersistend<T>;
+  }
+}
+
+const result = getUser2(1);
+const result2 = getUser2('asifajf');
