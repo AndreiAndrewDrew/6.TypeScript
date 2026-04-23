@@ -1,52 +1,21 @@
-const a1: number = Math.random() > 0.5 ? 1 : 0;
+type Modifier = 'read' | 'update' | 'create';
 
-interface HTTPResponse<T extends 'success' | 'failed'> {
-  code: number;
-  data: T extends 'success' ? string : Error;
-}
-
-const suc: HTTPResponse<'success'> = {
-  code: 200,
-  data: 'done',
+type UserRols = {
+  customers?: Modifier;
+  projects?: Modifier;
+  adminPanel?: Modifier;
 };
 
-const err: HTTPResponse<'failed'> = {
-  code: 200,
-  data: new Error(),
+type ModifierToAcces<Type> = {
+  +readonly [Property in keyof Type]-?: boolean;
 };
 
-//Exemplu
-class User {
-  id: number;
-  name: string;
-}
+type UserAcces2 = ModifierToAcces<UserRols>;
+//UserAcces2 creat automat!!!
 
-class UserPersistend extends User {
-  dbId: string;
-}
-
-function getUser(id: number): User;
-function getUser(dbId: string): UserPersistend;
-function getUser(dbIdOrId: string | number): User | UserPersistend {
-  if (typeof dbIdOrId === 'number') {
-    return new User();
-  } else {
-    return new UserPersistend();
-  }
-}
-
-//simplificam cu condition types
-type UserOrUserPersistend<T extends string | number> = T extends number
-  ? User
-  : UserPersistend;
-
-function getUser2<T extends string | number>(id: T): UserOrUserPersistend<T> {
-  if (typeof id === 'number') {
-    return new User() as UserOrUserPersistend<T>;
-  } else {
-    return new UserPersistend() as UserOrUserPersistend<T>;
-  }
-}
-
-const result = getUser2(1);
-const result2 = getUser2('asifajf');
+type UserAcces1 = {
+  customers?: boolean;
+  projects?: boolean;
+  adminPanel?: boolean;
+};
+//UserAcces1 create manual si daca sunt schimbari in type Userrole aici nu se fac
