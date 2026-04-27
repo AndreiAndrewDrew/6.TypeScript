@@ -1,12 +1,12 @@
-interface User {
-  name: string;
-  age?: number;
-  email: string;
+interface PaymentPersistent {
+  id: number;
+  sum: number;
+  from: string;
+  to: string;
 }
 
-type partial = Partial<User>; //toate cimpurile la userul nostru nu sunt obligatoriu
-const p: partial = {};
+type Payment = Omit<PaymentPersistent, 'id'>; //omitem cimpul "id"
+type PaymentRequisits = Pick<PaymentPersistent, 'from' | 'to'>; //omitem cimpul "id"
 
-type required = Required<User>; //le foace toate obligatorii
-type readonly = Readonly<User>; //le face readonly
-type requiredAndReadonly = Required<Readonly<User>>; //le face readonbly si oblogatorie
+type ExtractEx = Extract<'from' | 'to' | Payment, string>;
+type ExcludeEx = Exclude<'from' | 'to' | Payment, string>;
