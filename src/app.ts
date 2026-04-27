@@ -1,14 +1,12 @@
-type ReadOrWrite = 'read' | 'write';
-type Bulk = 'bulk' | '';
+interface User {
+  name: string;
+  age?: number;
+  email: string;
+}
 
-type Access = `can${Uppercase<ReadOrWrite>}${Capitalize<Bulk>}`;
+type partial = Partial<User>; //toate cimpurile la userul nostru nu sunt obligatoriu
+const p: partial = {};
 
-type ErrorOrSuccess = 'error' | 'success';
-
-type ResponseType1 = {
-  result: `http${Capitalize<ErrorOrSuccess>}`;
-};
-
-const a1: ResponseType1 = {
-  result: 'httpSuccess',
-};
+type required = Required<User>; //le foace toate obligatorii
+type readonly = Readonly<User>; //le face readonly
+type requiredAndReadonly = Required<Readonly<User>>; //le face readonbly si oblogatorie
