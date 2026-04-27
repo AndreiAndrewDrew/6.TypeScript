@@ -1,12 +1,11 @@
-interface PaymentPersistent {
-  id: number;
-  sum: number;
-  from: string;
-  to: string;
+class User {
+  constructor(public id:number, public name:string){}
 }
 
-type Payment = Omit<PaymentPersistent, 'id'>; //omitem cimpul "id"
-type PaymentRequisits = Pick<PaymentPersistent, 'from' | 'to'>; //omitem cimpul "id"
+function getData(id:number):User {
+  return new User(id, "Vasile")
+}
 
-type ExtractEx = Extract<'from' | 'to' | Payment, string>;
-type ExcludeEx = Exclude<'from' | 'to' | Payment, string>;
+type RT = ReturnType<typeof getData>
+
+type PT = Parameters<typeof getData>
