@@ -1,0 +1,2 @@
+Trebuie de facut tipul la rezultatul validatie unei forme, 
+bazindune pe tipul formei
