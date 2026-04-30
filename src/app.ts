@@ -1,17 +1,27 @@
-type A = Awaited<Promise<string>>;
-type A2 = Awaited<Promise<Promise<string>>>;
-
-interface IMenu {
-  name: string;
-  url: string;
+interface IUserService {
+  users: number;
+  getUserInDatabase(): number;
 }
 
-async function getMenu(): Promise<IMenu[]> {
-  return [{ name: 'Analitica', url: 'analytics' }];
+class UserService implements IUserService {
+  users: number = 1000;
+
+  getUserInDatabase(): number {
+    return this.users;
+  }
 }
 
-type R = Awaited<ReturnType<typeof getMenu>>;
-
-async function getArray<T>(x: T): Promise<Awaited<T>[]> {
-  return [await x];
+function nullUser(obj: IUserService) {
+  obj.users = 0;
+  return obj;
 }
+
+function logUser(obj: IUserService) {
+  console.log('Users: ' + obj.users);
+  return obj;
+}
+
+console.log(new UserService().getUserInDatabase());
+console.log(nullUser(new UserService()).getUserInDatabase());
+console.log(logUser(nullUser(new UserService())).getUserInDatabase());
+console.log(nullUser(logUser(new UserService())).getUserInDatabase());

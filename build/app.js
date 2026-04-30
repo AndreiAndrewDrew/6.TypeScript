@@ -1,16 +1,21 @@
 "use strict";
-const key = 'age'; //putem atribuie numai keie existenta
-//Exemplu de aplicarea "keyof"
-function getValue(obj, key) {
-    return obj[key];
+class UserService {
+    constructor() {
+        this.users = 1000;
+    }
+    getUserInDatabase() {
+        return this.users;
+    }
 }
-const user = {
-    name: 'Vasile',
-    age: 32,
-};
-const userName = getValue(user, 'name');
-//dar aici in loc de "name", putem face greseala
-//iata aici e si nevoie de "keyof", adica in fucntie mai sus
-const userAge = getValue(user, 'age');
-console.log('Nume-User:', userName + ';');
-console.log('Virsta-User:', userAge + ' ani.');
+function nullUser(obj) {
+    obj.users = 0;
+    return obj;
+}
+function logUser(obj) {
+    console.log('Users: ' + obj.users);
+    return obj;
+}
+console.log(new UserService().getUserInDatabase());
+console.log(nullUser(new UserService()).getUserInDatabase());
+console.log(logUser(nullUser(new UserService())).getUserInDatabase());
+console.log(nullUser(logUser(new UserService())).getUserInDatabase());
