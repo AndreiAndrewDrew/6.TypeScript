@@ -3,6 +3,8 @@ interface IUserService {
   getUserInDatabase(): number;
 }
 
+@nullUser
+@threeUserAdvanced
 class UserService implements IUserService {
   users: number = 1000;
 
@@ -11,17 +13,16 @@ class UserService implements IUserService {
   }
 }
 
-function nullUser(obj: IUserService) {
-  obj.users = 0;
-  return obj;
+function nullUser(target: Function) {
+  target.prototype.users = 0;
 }
 
-function logUser(obj: IUserService) {
-  console.log('Users: ' + obj.users);
-  return obj;
+function threeUserAdvanced<T extends { new (...args: any[]): {} }>(
+  constructor: T,
+) {
+  return class extends constructor {
+    users = 3;
+  };
 }
 
 console.log(new UserService().getUserInDatabase());
-console.log(nullUser(new UserService()).getUserInDatabase());
-console.log(logUser(nullUser(new UserService())).getUserInDatabase());
-console.log(nullUser(logUser(new UserService())).getUserInDatabase());
